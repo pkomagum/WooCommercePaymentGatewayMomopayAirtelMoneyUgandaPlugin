@@ -1,7 +1,7 @@
 <?php
 
-$authorisation = 'YjRjNWQzNGEtNDg1NS00ODNlLTg5YmYtMDA0ODYzZDljNDYyOjM5NDQ2MzM4OWFkNjQ4ODJhYzU1NDI5MDU0M2NiZTNl'; //Variable
-$apiUserID = "b4c5d34a-4855-483e-89bf-004863d9c462"; //Variable
+$authorisation = 'YmUxNzI5NjYtYThlNS00OGNlLThmMDgtZjBiOTU1ZWMzZGM3OjUyNTJhNmUxMzAzODQ4Njc5YjUyYzBkNWY1MjI1Y2Fj'; //Variable
+$apiUserID = ""; //Variable
 $OcpApimSubscriptionKey = "675bcf16da3845d3839bb3bcc5f2591d"; //Variable
 
 //////Other important Variables//////
@@ -13,6 +13,8 @@ $messageToCustomerForPayment = "Paying for good";
 $noteForPayment = "Please pay now";
 $targetEnvironment = "sandbox";
 
+echo "<hr>";
+echo $apiUserID;
 
 function gen_uuid() {
     $uuid = array(
@@ -53,6 +55,17 @@ function gen_uuid() {
 //   $generatedUUID = gen_uuid(); //Variable
 //   echo $generatedUUID;
 
+// $apiUserID = '879bb47b-e363-4e4b-d437-06a2b54f342c';
+
+$apiUserID = gen_uuid();
+
+echo "<hr>";
+echo $apiUserID;
+echo "<hr>";
+
+sleep(10);  // This will make the program wait for 60 seconds
+echo "10 seconds have passed!";
+echo "<hr>";
 function postCreatingAccessToken ($authorisation ,$OcpApimSubscriptionKey) {
 
 $curl = curl_init();
@@ -88,8 +101,17 @@ $decodedResponse = json_decode($response, true);
 
 
 }
+
 $AccessToken = postCreatingAccessToken ($authorisation ,$OcpApimSubscriptionKey);
-//  echo $AccessToken;
+// $AccessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSMjU2In0.eyJjbGllbnRJZCI6IjI0NTE5YjgyLTQxMzAtNDYwYS04MWIxLWViYmE2MzdjYjVlZCIsImV4cGlyZXMiOiIyMDIzLTA5LTAzVDEzOjI2OjE0LjEyNCIsInNlc3Npb25JZCI6ImUyMGFmZDZmLWEzOTMtNDIzMC04NGU5LTJiOGU5NWJjNWQzMSJ9.ltj0cVjfI-jF_h7rzY7kySETmQrdTclyFzY6Q02SKoCQNcWISNMM1nP_-5WqbltPwrOQOI_vASZyj_DfhQ9Jrn3TRR9-GQfeAe-Y6yM3x00hEAgt06xAKTZwQDOmsumfa9L736Usb9EhCnY-tawyriCD69R4LVrZvIRUplusPUz-1LKeB2VACwLE6dkkhsy05AA-jhr_G0SPDtCmwHQ1etWMyNk1UX6Efv147b95pA17lcNoHmoBGmmH4qRoRYC5tpFZrLs3Fxw0NJfLeze7mgees0dHS7sYjyKIDGOlmDDFBJPjlShnFoITMVp8-IOjmwNGbBmEVNPuC44-uXaJBA";
+echo $AccessToken;
+echo "<hr>";
+
+sleep(5);  // This will make the program wait for 60 seconds
+echo "5 seconds have passed!";
+echo "<hr>";
+
+
 
 function generateTrackingNumber($filename = "last_number.txt") {
     // Check if the file exists
@@ -162,10 +184,20 @@ function postSendingOutRequestToPay ($price, $paymentCurrency, $customerPhoneNum
     return $response;
 }
 
-postSendingOutRequestToPay ($price, $paymentCurrency, $customerPhoneNumber,$messageToCustomerForPayment,$noteForPayment, $AccessToken, $apiUserID, $OcpApimSubscriptionKey);
+echo postSendingOutRequestToPay ($price, $paymentCurrency, $customerPhoneNumber,$messageToCustomerForPayment,$noteForPayment, $AccessToken, $apiUserID, $OcpApimSubscriptionKey);
+echo "<hr>";
 
+sleep(30);  // This will make the program wait for 60 seconds
+echo "30 seconds have passed!";
 
+echo "<hr>";
 
+echo $apiUserID;
+echo "<hr>";
+echo $AccessToken;
+echo "<hr>";
+echo $OcpApimSubscriptionKey;
+echo "<hr>";
 
 function getCheckingIfPaymentIsComplete($apiUserID,$AccessToken,$OcpApimSubscriptionKey  ) {
 
@@ -197,11 +229,7 @@ return $response;
 
 }
 
-
 echo getCheckingIfPaymentIsComplete($apiUserID,$AccessToken,$OcpApimSubscriptionKey);
-
-
-
-
+echo "<hr>";
 
 ?>

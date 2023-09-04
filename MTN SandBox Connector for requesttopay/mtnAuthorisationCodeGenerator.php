@@ -38,10 +38,12 @@ function gen_uuid() {
 //  $generatedUUID = gen_uuid(); //Variable
 //  echo $generatedUUID;
 
-$apiUserID = "b4c5d34a-4855-483e-89bf-004863d9c462"; //Variable
+$apiUserID = gen_uuid(); //Variable
 $OcpApimSubscriptionKey = "675bcf16da3845d3839bb3bcc5f2591d"; //Variable
 $callBackHost = 'https//http://localhost/mtnapilead.php/:80'; //variable
-
+echo "<hr>";
+echo $apiUserID;
+echo "<hr>";
 
 function postGeneratingSanboxProvisioning ($callBackHost ,$apiUserID , $OcpApimSubscriptionKey) {
 
@@ -74,6 +76,11 @@ function postGeneratingSanboxProvisioning ($callBackHost ,$apiUserID , $OcpApimS
 
 }
 
+echo postGeneratingSanboxProvisioning ($callBackHost ,$apiUserID , $OcpApimSubscriptionKey);
+echo "<hr>";
+sleep(5);  // This will make the program wait for 60 seconds
+echo "5 seconds have passed!";
+
 function getCheckIfSanboxUserIsAvailable($apiUserID, $OcpApimSubscriptionKey) {
 
     $curl = curl_init();
@@ -97,6 +104,11 @@ function getCheckIfSanboxUserIsAvailable($apiUserID, $OcpApimSubscriptionKey) {
     return $response;
 }
 
+echo getCheckIfSanboxUserIsAvailable($apiUserID, $OcpApimSubscriptionKey);
+echo "<hr>";
+sleep(10);  // This will make the program wait for 60 seconds
+echo "10 seconds have passed!";
+echo "<hr>";
 function postGetSanboxApiKey ($apiUserID , $OcpApimSubscriptionKey) {
  
 $curl = curl_init();
@@ -131,6 +143,8 @@ curl_close($curl);
 }
 $apiKey = postGetSanboxApiKey ($apiUserID , $OcpApimSubscriptionKey);
 
+echo $apiKey;
+echo "<hr>";
 
 $credentials = $apiUserID . ':' . $apiKey;
 $authorisation = base64_encode($credentials);
